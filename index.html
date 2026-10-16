@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindfulFade - AI Digital Wellbeing Solution</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        /* This container allows simulating the grayscale fade effect */
+        .preview-window {
+            transition: filter 3s ease, background-color 3s ease;
+        }
+
+        .simulating-fade {
+            filter: grayscale(100%) brightness(60%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .slide-container {
+            background-color: var(--card-bg);
+            border: 2px solid #334155;
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            border-bottom: 2px solid #334155;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+        }
+
+        .tag {
+            background-color: #0369a1;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin: 0 0 0.5rem 0;
+            color: #e2e8f0;
+        }
+
+        p {
+            margin: 0;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .feature-card {
+            background-color: #0f172a;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        .feature-card strong {
+            display: block;
+            color: var(--accent-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .statement-box {
+            background: linear-gradient(135deg, #1e3a8a, #0369a1);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-weight: 500;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        /* Simulation Controls */
+        .demo-zone {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed #334155;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #38bdf8;
+            transform: translateY(-1px);
+        }
+
+        /* Breathing Circle Overlay */
+        .breathing-overlay {
+            display: none;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.95);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            animation: breathe 5s infinite ease-in-out;
+            box-shadow: 0 0 30px var(--accent-color);
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.6); opacity: 1; }
+        }
+
+        .close-btn {
+            margin-top: 2rem;
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container preview-window" id="appWindow">
+        <!-- Interactive Overlay Layer -->
+        <div class="breathing-overlay" id="breatheOverlay">
+            <div class="circle"></div>
+            <p style="color: white; margin-top: 2.5rem; font-size: 1.2rem;">Breathe in... Breathe out...</p>
+            <button class="close-btn" onclick="stopSimulation()">Exit Simulation</button>
+        </div>
+
+        <!-- Submission Content -->
+        <div class="header">
+            <h1>MindfulFade</h1>
+            <span class="tag">AI Topic: Screen Time</span>
+        </div>
+
+        <div class="section">
+            <h2>1. Problem</h2>
+            <p>Grade 11 students frequently lose crucial hours of sleep because they get stuck in endless, habit-forming scrolling loops on social media late at night.</p>
+        </div>
+
+        <div class="section">
+            <h2>2. AI Idea</h2>
+            <p>An AI-driven companion tool that tracks late-night scrolling patterns and subtly fades device visual stimulation to break the scrolling loop organically.</p>
+        </div>
+
+        <div class="section">
+            <h2>3. Core Features & Tips</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <strong>Dynamic Grayscale</strong>
+                    <p>Slowly drains color and lowers brightness over 15 minutes upon detecting habitual loops.</p>
+                </div>
+                <div class="feature-card">
+                    <strong>Breathing Overlays</strong>
+                    <p>Interjects transparent, calm breathing prompts instead of using frustrating rigid app locks.</p>
+                </div>
+                <div class="feature-card">
+                    <strong>Morning Metrics</strong>
+                    <p>Sends encouraging morning updates showing how much sleep quality was recovered.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="statement-box">
+                <strong>4. Why is it useful?</strong><br>
+                Our AI helper solves late-night sleep deprivation by gently breaking the psychological scrolling loop using smart visual cues instead of frustrating hard restrictions.
+            </div>
+        </div>
+
+        <!-- Interactive Prototype Button -->
+        <div class="demo-zone">
+            <button class="btn" id="demoBtn" onclick="startSimulation()">Simulate AI Action (Late Night Loop Detected)</button>
+        </div>
+    </div>
+
+    <script>
+        function startSimulation() {
+            const windowEl = document.getElementById('appWindow');
+            const overlayEl = document.getElementById('breatheOverlay');
+            
+            // 1. Fade the layout content to grayscale & dim brightness (Feature 1)
+            windowEl.classList.add('simulating-fade');
+            
+            // 2. Launch the gentle breathing intervention screen after 3 seconds (Feature 2)
+            setTimeout(() => {
+                if(windowEl.classList.contains('simulating-fade')) {
+                    overlayEl.style.display = 'flex';
+                }
+            }, 3000);
+        }
+
+        function stopSimulation() {
+            document.getElementById('appWindow').classList.remove('simulating-fade');
+            document.getElementById('breatheOverlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
